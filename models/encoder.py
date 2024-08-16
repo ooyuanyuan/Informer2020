@@ -44,7 +44,7 @@ class EncoderLayer(nn.Module):
         new_x, attn = self.attention(
             x, x, x,
             attn_mask = attn_mask
-        )
+        ) # 这里3个x，对应QKV矩阵；
         x = x + self.dropout(new_x)
 
         y = x = self.norm1(x)

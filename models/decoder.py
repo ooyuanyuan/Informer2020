@@ -18,13 +18,13 @@ class DecoderLayer(nn.Module):
         self.activation = F.relu if activation == "relu" else F.gelu
 
     def forward(self, x, cross, x_mask=None, cross_mask=None):
-        x = x + self.dropout(self.self_attention(
+        x = x + self.dropout(self.self_attention( # self_attention 计算自身之间；
             x, x, x,
             attn_mask=x_mask
         )[0])
         x = self.norm1(x)
 
-        x = x + self.dropout(self.cross_attention(
+        x = x + self.dropout(self.cross_attention(  # cross_attention：encoder与decoder之间
             x, cross, cross,
             attn_mask=cross_mask
         )[0])
